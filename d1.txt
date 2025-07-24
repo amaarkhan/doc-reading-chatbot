@@ -1,0 +1,126 @@
+Evalution of Agents
+Steps for evaluating in a diagram
+ 
+AI Agent Evaluation Pipeline with methods
+Stage 1: Input Processing & Initial Checks
+Evaluate: 
+1.	Input Logging & Preprocessing 
+a.	Log raw user input (text/voice) for audit trails. 
+b.	Check for harmful content, ambiguous queries, or prompt injections.
+
+Methods:
+For Logging:
+•	verbose=True
+•	LangChain Tracer / LangSmith
+
+For Checking Harmful Content: 
+•	OpenAI Moderation API
+•	ReBuff prompt injection detection
+
+For Ambiguity:
+•	LLM as a Judge, asking the LLM: "Is this prompt ambiguous?"
+
+Stage 2: Core Agent Execution
+Evaluate:
+2. Component-Wise checking
+1.	Action Sequence Verification 
+a.	Verify if all required steps were followed in order (e.g., retrieval → reasoning → tool call).
+b.	Example: Agent calling is in correct order 
+2.	Tool Execution Logging (Observability) 
+a.	Document: 
+i.	Tools called (e.g., Google Search, SQL DB). 
+ii.	Parameters passed (e.g., search query, SQL command). 
+iii.	Tool outputs (e.g., search results, query results).
+3.	Memory Management Assessment (Component-Wise) 
+a.	Test if the agent retained/recalled relevant context. 
+b.	Example: In a multi-turn chat, did it remember user preferences?
+
+Methods:
+For Action Sequences:
+•	Logging Steps
+•	LangSmith trace evaluations
+
+For Correct Tool Usage:
+•	LLM as a Judge
+
+For Memory:
+•	ConversationBufferMemory can be used for LangChain
+•	Incremental Memory Testing: Presenting long conversations with incremental queries designed to retrieve earlier information
+
+Stage 3: Output Generation
+Evaluate:
+6. Hallucination Detection 
+1.	Compare agent output to ground truth or use fact-checking tools (e.g., Google Fact Check). 
+2.	Edge Case Performance (Robustness) 
+a.	Test with rare/unexpected inputs (e.g., malformed JSON, off-topic queries).
+3.	Latency Measurement (Observability) 
+b.	Record time taken for: 
+i.	Input processing → Tool execution → Final response generation.
+
+
+Methods:
+For  Fact Checking and Hallucinations:
+•	Google Fact Check
+•	Exa Hallucination Detector
+
+For Edge Case :	
+•	Brute Force Testing
+
+For Latency Check:
+•	LangSmith’s built-in time
+
+Stage 4: Final Output Validation
+Evaluate:
+10. Task Completion Rate (Performance Metric)
+ - Check how much percent the agent fully solves the task (e.g., 8/10 correct answers). 
+1.	Efficiency Metrics 
+a.	Response time (ms), CPU/GPU usage, cost per interaction, track token consumption per step to optimize costs.
+
+2.	Automated Format Checks 
+a.	Validate output structure (e.g., JSON schema, citation formatting).
+
+Methods:
+For Task Completion:
+•	QAEvalChain in LangChain
+•	Azure AI Evaluation for a full Interface
+
+For Efficiency Metrics:
+•	LangSmith’s time built-in
+
+For Token Usage:
+•	Self-logic? (I’m not sure, maybe we create a custom function for it)
+
+For Format Checks:
+•	JsonSchemaEvaluator for LangChain
+•	Self Logic maybe through LLM as a Judge
+
+Tools:
+•	Phoenix Evaluator:
+o	Link: https://arize.com/docs/phoenix/evaluation/llm-evals/agent-evaluation
+o	What does it do:
+	Visual tracing of agent execution (routing, tool calls, memory use) 
+	Flags hallucinations and relevancy issues during trace playback
+	Tracks latency, token counts, cost metrics per session
+
+•	LangSmith:
+o	Link: https://docs.smith.langchain.com/evaluation
+o	What does it do:
+	Check if the agent's final answer is correct/relevant. A report showing which answers were right/wrong (e.g., Accuracy: 70%).
+	Verify if the agent took the right steps to solve the problem.
+	Check for a single step evaluation, like checking for correct tool usage.
+
+•	Azure AI Evaluation Library:
+o	Link: https:------------------------------
+o	What does it do:
+	Built-in evaluators: Task Adherence, Intent Resolution, Tool Accuracy, Relevance etc.
+	Supports batch evaluation, like evaluating thousands of agent interactions in a single run.
+
+•	Vertex AI Gen AI evaluation:
+o	Link: https://cloud.google.com/blog/products/ai-machine-learning/introducing-agent-evaluation-in-vertex-ai-gen-ai-evaluation-service
+o	What does it do:
+	Trajectory evaluation: Does the agent follows the correct actions
+	Response generation: Is the agent's output good, and does it make sense based on the tools it used
+	Single Tool Selection: Is the agent choosing the right tools for the job?
+
+
+

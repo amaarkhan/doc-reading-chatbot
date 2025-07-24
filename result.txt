@@ -1,0 +1,52 @@
+================================================================================
+FINAL AI AGENT EVALUATION REPORT
+================================================================================
+Session Duration: 2025-07-24 13:41:46 to 2025-07-24 13:43:20
+Total Session Time: 1.56 minutes
+--------------------------------------------------------------------------------
+
+COMPREHENSIVE SESSION METRICS:
+----------------------------------------
+Total Queries Processed: 2
+Successful Responses: 2
+Failed Responses: 0
+Success Rate: 100.00%
+Average Response Time: 4.44 seconds
+Hallucinations Detected: 0
+Ambiguous Queries: 2
+Harmful Content Blocked: 0
+
+STAGE-WISE PERFORMANCE ANALYSIS:
+----------------------------------------
+Stage 1 (Input Safety): 100.0% pass rate
+Stage 2 (Core Execution): 100.0% success rate
+Stage 3 (Output Quality): 100.0% quality rate
+Stage 4 (Final Validation): 100.0% validation rate
+
+QUALITY SCORE DISTRIBUTION:
+------------------------------
+Average Quality Score: 10.00/10
+Highest Score: 10/10
+Lowest Score: 10/10
+
+ALL INTERACTIONS LOG:
+------------------------------
+
+Interaction #1:
+Time: 2025-07-24T13:42:11.303887
+Question: Name the tools used in file for evaluation
+Response Time: 5.33s
+Quality Score: 10/10
+Stage Results: S1:✓ S2:✓ S3:✓ S4:✓
+--------------------------------------------------
+
+Interaction #2:
+Time: 2025-07-24T13:42:51.918681
+Question: what are the 4 stages?
+Response Time: 3.56s
+Quality Score: 10/10
+Stage Results: S1:✓ S2:✓ S3:✓ S4:✓
+--------------------------------------------------
+
+Final report generated at: 2025-07-24 13:43:20
+================================================================================
